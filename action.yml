@@ -1,7 +1,12 @@
----
 name: 'talkops-extension'
 author: 'talkops'
-description: 'A GitHub Action to build, push and publish TalkOps Extension'
+description: 'A GitHub Action to build, push, and publish TalkOps Extension'
+
+inputs:
+  github_token:
+    description: 'GitHub Token'
+    required: true
+
 runs:
   using: 'composite'
   steps:
@@ -21,7 +26,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github_token }}
 
     - name: Extract Docker image tag
       shell: bash
@@ -38,6 +43,7 @@ runs:
           ghcr.io/${{ github.repository }}:latest
 
     - name: Notify GitHub ETL
+      shell: bash
       run: |
         curl -X POST https://af56d2b1.talkops.app \
           -H "Content-Type: application/json" \

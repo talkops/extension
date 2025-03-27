@@ -1,6 +1,6 @@
 # talkops-extension
 
-A GitHub Action to build, push, and publish the TalkOps Extension.
+A GitHub Action to build, push, and publish TalkOps Extension.
 
 ## Overview
 
